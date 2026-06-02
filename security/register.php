@@ -10,12 +10,14 @@ unset($_SESSION['flash']);
 
 $pageTitle = "Registro - Web System";
 $errors = [];
-$input = ['nome' => '', 'apelido' => '', 'email' => '', 'telefone' => '', 'username' => '', 'password' => ''];
+$input = ['nome' => '', 'apelido' => '', 'data_nascimento' => '', 'morada' => '', 'email' => '', 'telefone' => '', 'username' => '', 'password' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $input['nome'] = trim($_POST['nome'] ?? '');
     $input['apelido'] = trim($_POST['apelido'] ?? '');
+    $input['data_nascimento'] = trim($_POST['data_nascimento'] ?? '');
+    $input['morada'] = trim($_POST['morada'] ?? '');
     $input['email'] = trim($_POST['email'] ?? '');
     $input['telefone'] = trim($_POST['telefone'] ?? '');
     $input['username'] = trim($_POST['username'] ?? '');
@@ -29,15 +31,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['apelido'] = 'Apelido é obrigatório';
     }
 
+    if ($input['data_nascimento'] === '') {
+        $errors['data_nascimento'] = 'Data Nascimento é obrigatória';
+    }
+    if ($input['morada'] === '') {
+        $errors['morada'] = 'Morada é obrigatória';
+    }
     if ($input['email'] === '') {
         $errors['email'] = 'Email é obrigatório';
     }
 
     if ($input['username'] === '') {
-        $errors['username'] = 'Username é obrigatório';
+        $errors['username'] = 'Nome do usuário é obrigatório';
     }
     if ($input['password'] === '') {
-        $errors['password'] = 'Password é obrigatório';
+        $errors['password'] = 'Senha é obrigatório';
     }
 
     if (empty($errors)) {
@@ -45,6 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $securityService->registerUser(
             $input['nome'],
             $input['apelido'],
+            $input['data_nascimento'],
+            $input['morada'],
             $input['email'],
             $input['telefone'],
             $input['username'],
@@ -52,12 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($result === true) {
-            $_SESSION['flash'] = ['type' => 'success', 'message' => 'Usuario criado com sucesso!'];
-            if (SessionService::isAdmin()) {
-                header("Location: " . AppConfigConst::PATH_PROFILE_MANAGER);
-            } else {
-                header("Location: " . AppConfigConst::PATH_LOGIN);
-            }
+            $_SESSION['flash'] = ['type' => 'success', 'message' => 'Usuário criado com sucesso!'];
+            header("Location: " . AppConfigConst::PATH_LOGIN);
             exit;
         } else {
             $errors['generic'] = $result;
@@ -127,6 +133,34 @@ if (SessionService::isAdmin()) {
                                 <?php endif; ?>
                             </div>
 
+                            <!--Data Nascimento-->
+                            <div class="col-12">
+                                <label for="data_nascimento" class="form-titulo">Data Nascimento<span
+                                        class="text-danger">*</span></label>
+                                <input type="date" id="data_nascimento" name="data_nascimento"
+                                    class="form-control <?= isset($errors['data_nascimento']) ? 'is-invalid' : '' ?>"
+                                    value="<?= htmlspecialchars($input['data_nascimento']) ?>">
+                                <?php if (isset($errors['data_nascimento'])): ?>
+                                    <div class="invalid-feedback">
+                                        <?= $errors['data_nascimento'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+
+                            <!--morada-->
+                            <div class="col-12">
+                                <label for="morada" class="form-titulo">Morada<span class="text-danger">*</span></label>
+                                <input type="text" id="morada" name="morada"
+                                    class="form-control <?= isset($errors['morada']) ? 'is-invalid' : '' ?>"
+                                    value="<?= htmlspecialchars($input['morada']) ?>" maxlength="100">
+                                <?php if (isset($errors['morada'])): ?>
+                                    <div class="invalid-feedback">
+                                        <?= $errors['morada'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
                             <!--Email-->
                             <div class="col-12">
                                 <label for="email" class="form-titulo">Email<span class="text-danger">*</span></label>
@@ -180,18 +214,10 @@ if (SessionService::isAdmin()) {
                         <hr class="my-4">
 
                         <div class="d-flex gap-2 justify-content-end">
-                            <?php if (SessionService::isAdmin()): ?>
-                                <a href="<?= AppConfigConst::PATH_PROFILE_MANAGER ?>" class="btn btn-outline-secondary">
-                                    <i class="bi bi-x-lg me-1"></i>
-                                    Cancelar
-                                </a>
-                            <?php else: ?>
-                                <a href="<?= AppConfigConst::PATH_INDEX ?>" class="btn btn-outline-secondary">
-                                    <i class="bi bi-x-lg me-1"></i>
-                                    Cancelar
-                                </a>
-                            <?php endif; ?>
-
+                            <a href="<?= AppConfigConst::PATH_INDEX ?>" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+                            </a>
                             <button type="submit" class="btn btn-dark">
                                 <i class="bi bi-box-arrow-in-right me-1"></i>
                                 Registrar

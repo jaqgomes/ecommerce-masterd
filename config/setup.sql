@@ -16,6 +16,7 @@ CREATE TABLE produtos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(150) NOT NULL,
     descricao TEXT,
+    categoria VARCHAR(100),
     preco DECIMAL(10, 2) NOT NULL,
     stock INT DEFAULT 0,
     imagem VARCHAR(255),

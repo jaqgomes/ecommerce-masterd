@@ -11,8 +11,11 @@ class AppConfigConst
     public const string PATH_LOGOUT = '/ecommerce-masterd/security/logout.php';
     public const string PATH_REGISTER = '/ecommerce-masterd/security/register.php';
     public const string PATH_PROFILE = '/ecommerce-masterd/security/profile.php';
-    public const string PATH_PROFILE_MANAGER = '/ecommerce-masterd/security/profile-manager.php';
-    public const string PATH_PRODUCTS_LIST = '/ecommerce-masterd/products/products-list.php';
+    public const string PATH_PRODUCTS_LIST = '/ecommerce-masterd/product/list-product.php';
+    public const string PATH_PRODUCTS_UPLOADS = '/ecommerce-masterd/product/uploads/';
+    public const string PATH_PRODUCTS_MANAGER = '/ecommerce-masterd/products/list-product-manager.php';
+    public const string PATH_CART = '/ecommerce-masterd/cart/cart.php';
+    public const string PATH_ADD_TO_CART = '/ecommerce-masterd/cart/add-to-cart.php';
     public const string ACTION_PROFILE_DELETE = '/ecommerce-masterd/security/delete-profile.php';
 }
 

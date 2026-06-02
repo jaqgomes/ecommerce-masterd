@@ -10,7 +10,7 @@ $securityService = new SecurityService();
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-$pageTitle = "Login - Web System";
+$pageTitle = "Login - Ecommerce";
 $errors = [];
 $input = ['username' => '', 'password' => ''];
 

@@ -8,24 +8,22 @@ session_start();
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-if (SessionService::isAdmin()) {
-    $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
-} else {
-    $id = isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : 0;
-}
+$id = isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : 0;
 
 $profile = $securityService->getUserById($id);
 
-$pageTitle = "Perfil do Usuário - Web System";
+$pageTitle = "Perfil do Usuário - Ecommerce";
 $errors = [];
 $input = $profile;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input['nome'] = trim($_POST['nome'] ?? '');
     $input['apelido'] = trim($_POST['apelido'] ?? '');
+    $input['data_nascimento'] = trim($_POST['data_nascimento'] ?? '');
+    $input['morada'] = trim($_POST['morada'] ?? '');
     $input['email'] = trim($_POST['email'] ?? '');
-    $input['telefone'] = trim($_POST['telefone'] ?? '');
     $input['username'] = trim($_POST['username'] ?? '');
+    $input['senha_hash'] = trim($_POST['senha_hash'] ?? '');
 
     if ($input['nome'] === '') {
         $errors['nome'] = 'Nome é obrigatório';
@@ -33,6 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($input['apelido'] === '') {
         $errors['apelido'] = 'Apelido é obrigatório';
+    }
+    if ($input['data_nascimento'] === '') {
+        $errors['data_nascimento'] = 'Data de Nacimento é obrigatória';
+    }
+    if ($input['morada'] === '') {
+        $errors['morada'] = 'Morada é obrigatória';
     }
 
     if ($input['email'] === '') {
@@ -49,21 +53,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id,
             $input['nome'],
             $input['apelido'],
+            $input['data_nascimento'],
+            $input['morada'],
             $input['email'],
             $input['telefone'],
-            $input['username']
+            $input['username'],
+            $input['senha_hash']
         );
 
         if ($result === true) {
-            if (SessionService::isAdmin()) {
-                $_SESSION['flash'] = ['type' => 'success', 'message' => 'Usuário atualizado com sucesso!'];
-                header("Location: " . AppConfigConst::PATH_PROFILE_MANAGER);
-                exit;
-            } else {
-                $_SESSION['flash'] = ['type' => 'success', 'message' => 'Usuário atualizado com sucesso!'];
-                header("Location: " . AppConfigConst::PATH_PROFILE);
-                exit;
-            }
+            $_SESSION['flash'] = ['type' => 'success', 'message' => 'Usuário atualizado com sucesso!'];
+            header("Location: " . AppConfigConst::PATH_PROFILE);
+            exit;
         } else {
             $errors['generic'] = $result;
         }
@@ -136,6 +137,33 @@ require_once __DIR__ . '/../includes/header.php';
                                 <?php endif; ?>
                             </div>
 
+
+                            <!--Data nascimento-->
+                            <div class="col-12">
+                                <label for="data_nascimento" class="form-titulo">Data Nascimento<span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="data_nascimento" name="data_nascimento"
+                                    class="form-control <?= isset($errors['data_nascimento']) ? 'is-invalid' : '' ?>"
+                                    value="<?= htmlspecialchars($input['data_nascimento']) ?>" maxlength="100">
+                                <?php if (isset($errors['data_nascimento'])): ?>
+                                    <div class="invalid-feedback">
+                                        <?= $errors['data_nascimento'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <!--Morada-->
+                            <div class="col-12">
+                                <label for="morada" class="form-titulo">Morada<span class="text-danger">*</span></label>
+                                <input type="text" id="morada" name="morada"
+                                    class="form-control <?= isset($errors['morada']) ? 'is-invalid' : '' ?>"
+                                    value="<?= htmlspecialchars($input['morada']) ?>" maxlength="100">
+                                <?php if (isset($errors['morada'])): ?>
+                                    <div class="invalid-feedback">
+                                        <?= $errors['morada'] ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
                             <!--Email-->
                             <div class="col-12">
                                 <label for="email" class="form-titulo">Email<span class="text-danger">*</span></label>
@@ -171,35 +199,23 @@ require_once __DIR__ . '/../includes/header.php';
                                 <?php endif; ?>
                             </div>
 
-                            <!--Password-->
+                            <!--Senha hash-->
                             <div class="col-12">
-                                <label for="password" class="conteudo-label">Senha <span
-                                        class="text-danger">*</span></label>
-                                <input type="password" id="password" name="password"
-                                    class="form-control <?= isset($errors['password']) ? 'is-invalid' : '' ?>"
+                                <label for="senha_hash" class="conteudo-label">Senha</label>
+                                <input type="password" id="senha_hash" name="senha_hash"
+                                    class="form-control <?= isset($errors['senha_hash']) ? 'is-invalid' : '' ?>"
                                     maxlength="100">
-                                <?php if (isset($errors['password'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['password'] ?>
-                                    </div>
-                                <?php endif; ?>
                             </div>
                         </div>
 
                         <hr class="my-4">
 
                         <div class="d-flex gap-2 justify-content-end">
-                            <?php if (SessionService::isAdmin()): ?>
-                                <a href="<?= AppConfigConst::PATH_PROFILE_MANAGER?>" class="btn btn-outline-secondary">
-                                    <i class="bi bi-x-lg me-1"></i>
-                                    Cancelar
-                                </a>
-                            <?php else: ?>
-                                <a href="<?= AppConfigConst::PATH_INDEX?>" class="btn btn-outline-secondary">
-                                    <i class="bi bi-x-lg me-1"></i>
-                                    Cancelar
-                                </a>
-                            <?php endif; ?>
+
+                            <a href="<?= AppConfigConst::PATH_INDEX ?>" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-lg me-1"></i>
+                                Cancelar
+                            </a>
                             <button type="submit" class="btn btn-dark">
                                 <i class="bi bi-box-arrow-in-right me-1"></i>
                                 Atualizar

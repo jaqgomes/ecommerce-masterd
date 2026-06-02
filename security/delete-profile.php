@@ -9,8 +9,7 @@ $securityService = new SecurityService();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-
+    $id = (int) $_POST['id'] ?? 0;
     if ($id > 0) {
 
         if ($securityService->deleteUser($id)) {

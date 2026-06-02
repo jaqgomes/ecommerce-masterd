@@ -6,7 +6,7 @@ session_start();
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-$nomeUtilizador = isset($_SESSION['nome']) ? $_SESSION['nome'] : '';
+$nomeUtilizador = $_SESSION['nome'] ?? '';
 
 require_once __DIR__ . '/includes/header.php';
 ?>

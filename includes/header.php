@@ -53,17 +53,6 @@
                                     </a>
                                 </li>
                             <?php endif; ?>
-
-                            <?php if (SessionService::isLoggedIn()): ?>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="<?= AppConfigConst::PATH_LOGOUT ?>">
-                                        <i class="bi bi-box-arrow-right me-1"></i>Sair
-                                    </a>
-                                </li>
-                            <?php endif; ?>
                             <?php if (!SessionService::isLoggedIn()): ?>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -76,21 +65,34 @@
                             <?php endif; ?>
                             <?php if (SessionService::isLoggedIn()): ?>
                                 <li>
+                                    <a class="dropdown-item" href="<?= AppConfigConst::PATH_PROFILE ?>">
+                                        <i class="bi bi-person-lines-fill me-1"></i>Perfil
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <?php if (SessionService::isLoggedIn()): ?>
+                                <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <?php if (SessionService::isAdmin()): ?>
-                                        <a class="dropdown-item" href="<?= AppConfigConst::PATH_PROFILE_MANAGER ?>">
-                                            <i class="bi bi-person-lines-fill me-1"></i>Perfil
-                                        </a>
-                                    <?php else: ?>
-                                        <a class="dropdown-item" href="<?= AppConfigConst::PATH_PROFILE ?>">
-                                            <i class="bi bi-person-lines-fill me-1"></i>Perfil
-                                        </a>
-                                    <?php endif; ?>
+                                    <a class="dropdown-item" href="<?= AppConfigConst::PATH_LOGOUT ?>">
+                                        <i class="bi bi-box-arrow-right me-1"></i>Sair
+                                    </a>
                                 </li>
                             <?php endif; ?>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <?php $cartCount = array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')); ?>
+                        <a class="nav-link cart-badge-link position-relative" href="<?= AppConfigConst::PATH_CART ?>"
+                            aria-label="Carrinho">
+                            <i class="bi bi-cart3"></i>
+                            <?php if ($cartCount > 0): ?>
+                                <span class="badge cart-count-badge">
+                                    <?= $cartCount ?>
+                                </span>
+                            <?php endif; ?>
+                        </a>
                     </li>
                 </ul>
             </div>
