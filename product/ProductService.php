@@ -16,10 +16,10 @@ class ProductService
     //executa uma query no banco de dados ($stmt);
     //utilizado quando na criacao de projetos, depois de validar os dados, depois de fazer upload da imagem
 
-    public function createProduct($nome, $descricao, $preco, $stock, $imagem, $data_criacao)
+    public function createProduct($nome, $descricao, $categoria, $preco, $stock, $imagem, $data_criacao)
     {
-        $stmt = $this->database->prepare("INSERT INTO produtos (nome, descricao, preco, stock, imagem, data_criacao) VALUES(?,?,?,?,?,?)");
-        $stmt->bind_param("ssssss", $nome, $descricao, $preco, $stock, $imagem, $data_criacao);
+        $stmt = $this->database->prepare("INSERT INTO produtos (nome, descricao, categoria, preco, stock, imagem, data_criacao) VALUES(?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssiss", $nome, $descricao, $categoria, $preco, $stock, $imagem, $data_criacao);
         return $stmt->execute();
 
     }
@@ -40,10 +40,10 @@ class ProductService
         return $stmt->get_result()->fetch_assoc();
     }
     //esse metodo atualiza o banco de dados , substituindo pelo que enviar. Apenas com valor do ID que passar 
-    public function updateProduct($id, $nome, $descricao, $preco, $stock, $imagem, $data_criacao)
+    public function updateProduct($id, $nome, $descricao, $categoria, $preco, $stock, $imagem, $data_criacao)
     {
-        $stmt = $this->database->prepare("UPDATE produtos SET nome = ?, descricao = ?, preco = ?, stock = ?, imagem = ?, data_criacao = ?  WHERE id = ?");
-        $stmt->bind_param("sssssssi", $nome, $descricao, $preco, $stock, $imagem, $data_criacao, $id);
+        $stmt = $this->database->prepare("UPDATE produtos SET nome = ?, descricao = ?, categoria = ?, preco = ?, stock = ?, imagem = ?, data_criacao = ?  WHERE id = ?");
+        $stmt->bind_param("sssssssi", $nome, $descricao, $categoria, $preco, $stock, $imagem, $data_criacao, $id);
         return $stmt->execute();
 
     }

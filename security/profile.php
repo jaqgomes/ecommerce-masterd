@@ -1,12 +1,13 @@
 <?php
 require_once __DIR__ . '/../security/SessionService.php';
 
-include 'SecurityService.php';
-$securityService = new SecurityService();
-
 session_start();
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
+SessionService::isRequireLogin();
+
+include 'SecurityService.php';
+$securityService = new SecurityService();
 
 $id = isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : 0;
 

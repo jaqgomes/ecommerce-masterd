@@ -26,20 +26,21 @@
             <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= AppConfigConst::PATH_PRODUCTS_LIST ?>">
-                            <i class="bi bi-newspaper me-1"></i>Produtos
-                        </a>
+                        <?php if (SessionService::isAdmin()): ?>
+                            <a class="nav-link" href="<?= AppConfigConst::PATH_PRODUCTS_MANAGER ?>">
+                                <i class="bi-shop-window me-1"></i>Produtos
+                            </a>
+                        <?php elseif (SessionService::isLoggedIn()): ?>
+                            <a class="nav-link" href="<?= AppConfigConst::PATH_PRODUCTS_LIST ?>">
+                                <i class="bi-shop-window me-1"></i>Produtos
+                            </a>
+                        <?php endif; ?>
                     </li>
                     <?php if (SessionService::isLoggedIn()): ?>
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="<?= AppConfigConst::PATH_ORDER_LIST ?>">
                             <i class="bi bi-person-lines-fill me-1"></i>Encomendas
                         </a>
                     <?php endif; ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= AppConfigConst::PATH_ABOUT ?>">
-                            <i class="bi bi-plus-circle me-1"></i>Sobre
-                        </a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">

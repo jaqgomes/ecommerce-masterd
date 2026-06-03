@@ -9,7 +9,7 @@ session_start();
 
 $productService = new ProductService();
 
-$listProductPageLink = "/ecommerce-masterd/products/list-products-manager.php";
+$listProductPageLink = "/ecommerce-masterd/product/list-product-manager.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: $listProductPageLink");
@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
 if ($id > 0) {
-    ;
 
     if ($productService->deleteProduct($id)) {
         $_SESSION['flash'] = ['type' => 'success', 'message' => 'Produto removido com sucesso.'];

@@ -1,28 +1,25 @@
 <?php
 require_once __DIR__ . '/../security/SessionService.php';
 
-include 'ProductService.php';
-
-$pageTitle = 'Ecommerce - MasterD';
-
 // Flash messages via session
 session_start();
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
-#ProductService::isRequireAdmin();
+SessionService::isRequireAdmin();
+
+include 'ProductService.php';
+
+$pageTitle = 'Ecommerce - MasterD';
 
 $productService = new ProductService();
 $productList = $productService->getAllProduct();
-
-$createProductPageLink = "create-product.php";
-$deleteProductPageLink = "delete-product.php";
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="page-header mb-0">Gerenciador de Produtos</h2>
-    <a href="<?= $createProductPageLink ?>" class="btn btn-dark"><i class="bi bi-plus-lg me-1"></i>Adicionar</a>
+    <a href="<?= AppConfigConst::PATH_PRODUCTS_CREATE ?>" class="btn btn-dark"><i class="bi bi-plus-lg me-1"></i>Adicionar</a>
 </div>
 
 <?php if ($flash): ?>
@@ -37,10 +34,9 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="card form-card">
         <div class="empty-state">
-            <i class="bi bi-newspaper"></i>
             <h4>Nenhuma produto encontrado. </h4>
             <p>Comece adicionando seu primeiro produto.</p>
-            <a href="<?= $createProductPageLink ?>" class="btn btn-dark">Adicionar</a>
+            <a href="<?= AppConfigConst::PATH_PRODUCTS_CREATE ?>" class="btn btn-dark">Adicionar</a>
         </div>
     </div>
 
@@ -50,11 +46,10 @@ require_once __DIR__ . '/../includes/header.php';
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Descrição</th>
                 <th scope="col">Preço</th>
+                <th scope="col">Categoria</th>
                 <th scope="col">Stock</th>
-                <th scope="col">Imagem</th>
-                <th scope="col">Data Criação</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
 
@@ -62,16 +57,17 @@ require_once __DIR__ . '/../includes/header.php';
             <?php foreach ($productList as $product) { ?>
                 <tr>
                     <td><?= $product['id'] ?></td>
-                    <td><?= $product['titulo'] ?></td>
-                    <td><?= $product['conteudo'] ?></td>
-                    <td><?= date('d-m-Y', strtotime($product['data_publicacao'])) ?></td>
+                    <td><?= $product['nome'] ?></td>
+                    <td><?= $product['preco'] ?></td>
+                    <td><?= $product['categoria'] ?></td>
+                    <td><?= $product['stock'] ?></td>
                     <td>
-                        <a href="edit-product.php?id=<?= $product['id'] ?>" class="btn btn-outline-dark btn-sm flex-fill">
+                        <a href="<?= AppConfigConst::PATH_PRODUCTS_EDIT . "?id=" . $product['id'] ?>" class="btn btn-outline-dark btn-sm flex-fill">
                             <i class="bi bi-pencil me-1"></i>Editar
                         </a>
                         <button type="button" class="btn btn-outline-danger btn-sm flex-fill" data-bs-toggle="modal"
                             data-bs-target="#deleteModal" data-id="<?= $product['id'] ?>"
-                            data-name="<?= htmlspecialchars($product['titulo']) ?>" data-action="<?= $deleteProductPageLink ?>">
+                            data-name="<?= htmlspecialchars($product['nome']) ?>" data-action="<?= AppConfigConst::PATH_PRODUCTS_DELETE ?>">
                             <i class="bi bi-trash me-1"></i>Deletar
                         </button>
                     </td>

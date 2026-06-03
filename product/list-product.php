@@ -77,7 +77,8 @@ require_once __DIR__ . '/../includes/header.php';
                         <div class="d-flex gap-2 justify-content-between">
                             <?php if ((int) $product['stock'] > 0): ?>
                                 <form action="<?= AppConfigConst::PATH_ADD_TO_CART ?>" method="POST" class="mb-0">
-                                    <button type="submit" class="btn btn-success btn-sm" value="<?= (int) $product['id'] ?>">
+                                    <button type="submit" class="btn btn-success btn-sm" name="product_id"
+                                        value="<?= (int) $product['id'] ?>">
                                         <i class="bi bi-cart-plus me-1"></i>
                                         Carrinho
                                     </button>
@@ -89,7 +90,7 @@ require_once __DIR__ . '/../includes/header.php';
                                 </button>
                             <?php endif; ?>
                         </div>
-                        <a href="view-product.php?id=<?= $product['id'] ?>" class="stretched-link"></a>
+                        <a href="<?= AppConfigConst::PATH_PRODUCTS_VIEW . "?id=" . $product['id'] ?>" class="stretched-link"></a>
                     </div>
                 </div>
             </div>

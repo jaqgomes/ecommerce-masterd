@@ -100,8 +100,8 @@ require_once __DIR__ . '/../includes/header.php';
                 <!-- Quantity & Add to Basket - Push to bottom -->
                 <div class="mt-auto">
                     <?php if ((int) $product['stock'] > 0): ?>
-                        <form id="addToBasketForm" action="add-to-cart.php" method="POST" class="mt-4 pt-3 border-top">
-                            <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                        <form id="addToBasketForm" action="<?= AppConfigConst::PATH_ADD_TO_CART ?>" method="POST"
+                            class="mt-4 pt-3 border-top">
                             <div class="row g-2">
                                 <div class="col-auto">
                                     <label for="quantity" class="form-label">Quantidade</label>
@@ -111,8 +111,9 @@ require_once __DIR__ . '/../includes/header.php';
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-dark btn-lg mt-4 w-100">
-                                <i class="bi bi-cart-plus me-2"></i>
+                            <button type="submit" class="btn btn-dark btn-lg mt-4 w-100" name="product_id"
+                                value="<?= (int) $product['id'] ?>">
+                                <i class=" bi bi-cart-plus me-2"></i>
                                 Adicionar ao Carrinho
                             </button>
                         </form>
