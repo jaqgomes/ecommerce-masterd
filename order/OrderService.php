@@ -56,14 +56,6 @@ class OrderService
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function createOrder($id_utilizador, $data_encomenda, $total, $estado, $morada)
-    {
-        $stmt = $this->database->prepare("INSERT INTO encomendas (id, id_utilizador, data_encomenda, total, estado, morada) VALUES(?,?,?,?,?,?)");
-        $stmt->bind_param("iisdss", $id, $id_utilizador, $data_encomenda, $total, $estado, $morada);
-        return $stmt->execute();
-
-    }
-
     public function createOrderWithItems($id_utilizador, $total, $items, $morada)
     {
         $this->database->begin_transaction();
