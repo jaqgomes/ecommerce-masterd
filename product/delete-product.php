@@ -5,7 +5,7 @@ require_once __DIR__ . '/../security/SessionService.php';
 include('ProductService.php');
 
 session_start();
-#ProductService::isRequireAdmin();
+SessionService::isRequireAdmin();
 
 $productService = new ProductService();
 
