@@ -33,12 +33,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($input['data_nascimento'] === '') {
         $errors['data_nascimento'] = 'Data Nascimento é obrigatória';
+    } else {
+        $birthDate = DateTime::createFromFormat('Y-m-d', $input['data_nascimento']);
+        $today = new DateTime();
+        if (!$birthDate) {
+            $errors['data_nascimento'] = 'Data de nascimento inválida';
+        } else {
+            $age = $today->diff($birthDate)->y;
+            if ($age < 18) {
+                $errors['data_nascimento'] = 'Somente maiores de 18 anos podem se registrar';
+            }
+        }
     }
     if ($input['morada'] === '') {
         $errors['morada'] = 'Morada é obrigatória';
     }
     if ($input['email'] === '') {
         $errors['email'] = 'Email é obrigatório';
+    } elseif (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Email inválido. Informe um endereço válido.';
+    }
+
+    if ($input['telefone'] !== '' && !preg_match('/^(2|9)\d{8}$/', $input['telefone'])) {
+        $errors['telefone'] = 'Telefone inválido.';
     }
 
     if ($input['username'] === '') {
@@ -179,7 +196,12 @@ if (SessionService::isAdmin()) {
                                 <label for="telefone" class="form-titulo">Telefone</label>
                                 <input type="tel" id="telefone" name="telefone"
                                     class="form-control <?= isset($errors['telefone']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['telefone']) ?>" maxlength="100">
+                                    value="<?= htmlspecialchars($input['telefone']) ?>" maxlength="9" pattern="(2|9)[0-9]{8}" inputmode="numeric">
+                                <?php if (isset($errors['telefone'])): ?>
+                                    <div class="invalid-feedback">
+                                        <?= $errors['telefone'] ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
 
                             <!--Username-->

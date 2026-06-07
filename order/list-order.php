@@ -24,8 +24,6 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="page-header mb-0">Encomendas</h2>
-    <a href="<?= AppConfigConst::PATH_PRODUCTS_CREATE ?>" class="btn btn-dark"><i
-            class="bi bi-plus-lg me-1"></i>Adicionar</a>
 </div>
 
 <?php if ($flash): ?>
@@ -40,9 +38,7 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="card form-card">
         <div class="empty-state">
-            <h4>Nenhuma produto encontrado. </h4>
-            <p>Comece adicionando seu primeiro produto.</p>
-            <a href="<?= AppConfigConst::PATH_ORDER_LIST ?>" class="btn btn-dark">Adicionar</a>
+            <h4>Nenhum pedido realizado. </h4>
         </div>
     </div>
 

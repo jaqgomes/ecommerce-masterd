@@ -47,6 +47,14 @@
                             <i class="bi bi-person me-1"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
+                            <?php if (SessionService::isLoggedIn()): ?>
+                                <li>
+                                    <a class="dropdown-item" href="<?= AppConfigConst::PATH_PROFILE ?>">
+                                        <i class="bi bi-person-lines-fill me-1"></i>
+                                        <?= SessionService::getUsername() ?>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <?php if (!SessionService::isLoggedIn()): ?>
                                 <li>
                                     <a class="dropdown-item" href="<?= AppConfigConst::PATH_LOGIN ?>"><i
@@ -61,13 +69,6 @@
                                 <li>
                                     <a class="dropdown-item" href="<?= AppConfigConst::PATH_REGISTER ?>">
                                         <i class="bi bi-plus-circle me-1"></i>Registrar
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                            <?php if (SessionService::isLoggedIn()): ?>
-                                <li>
-                                    <a class="dropdown-item" href="<?= AppConfigConst::PATH_PROFILE ?>">
-                                        <i class="bi bi-person-lines-fill me-1"></i>Perfil
                                     </a>
                                 </li>
                             <?php endif; ?>

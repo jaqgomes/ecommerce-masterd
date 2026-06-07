@@ -24,7 +24,7 @@ class SessionService
     public static function isRequireLogin()
     {
         if (!self::isLoggedIn()) {
-            header("Location: " . AppConfigConst::PATH_INDEX);
+            header("Location: " . AppConfigConst::PATH_LOGIN);
             exit;
         }
     }
@@ -34,6 +34,14 @@ class SessionService
         if (!self::isAdmin()) {
             header("Location: " . AppConfigConst::PATH_INDEX);
             exit;
+        }
+    }
+
+    public static function getUsername()
+    {
+        if (self::isLoggedIn()) {
+            return isset($_SESSION['nome']) ? 'Bem vindo ' . $_SESSION['nome'] : 'Bem Vindo!';
+;
         }
     }
     

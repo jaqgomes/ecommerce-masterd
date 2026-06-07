@@ -22,6 +22,7 @@ class AppConfigConst
     public const string PATH_ADD_TO_CART = '/ecommerce-masterd/cart/add-to-cart.php';
 
     public const string PATH_ORDER_LIST = '/ecommerce-masterd/order/list-order.php';
+    public const string PATH_ORDER_CHECKOUT = '/ecommerce-masterd/order/checkout.php';
 
     public const string PATH_LOGIN = '/ecommerce-masterd/security/login.php';
     public const string PATH_LOGOUT = '/ecommerce-masterd/security/logout.php';

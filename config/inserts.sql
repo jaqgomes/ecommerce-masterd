@@ -21,12 +21,12 @@ VALUES
 ('Hub USB 3.0', 'Hub USB 3.0 compacto com 4 portas, transferência de dados até 5Gbps (10x mais rápido que USB 2.0). Suporta alimentação externa através de adaptador 2A incluído, garantindo energia suficiente para dispositivos de alto consumo. Construção em alumínio com dissipação térmica, compatível com Windows, Mac e Linux. Ideal para expandir conectividade de computadores ultraportáteis, televisões e consolas.', 'Acessórios', 59.99, 35, 'hub_usb.png');
 
 -- Insert orders
-INSERT INTO encomendas (id_utilizador, data_encomenda, total, estado)
+INSERT INTO encomendas (id_utilizador, morada, data_encomenda, total, estado)
 VALUES
-(2, '2026-05-15 10:30:00', 1449.98, 'entregue'),
-(3, '2026-05-18 14:00:00', 299.99, 'enviado'),
-(4, '2026-05-20 11:45:00', 679.96, 'pendente'),
-(2, '2026-05-22 15:30:00', 179.98, 'entregue');
+(2, 'Rua Principal 10', '2026-05-15 10:30:00', 1449.98, 'entregue'),
+(3, 'Avenida Central 5', '2026-05-18 14:00:00', 299.99, 'enviado'),
+(4, 'Rua Lateral 20', '2026-05-20 11:45:00', 679.96, 'pendente'),
+(2, 'Rua Principal 10', '2026-05-22 15:30:00', 179.98, 'entregue');
 
 -- Insert order items
 INSERT INTO itens_encomenda (id_encomenda, id_produto, quantidade, preco_unitario)

@@ -25,6 +25,7 @@ CREATE TABLE produtos (
 CREATE TABLE encomendas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_utilizador INT NOT NULL,
+    morada VARCHAR(100) NOT NULL,
     data_encomenda DATETIME DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10, 2) NOT NULL,
     estado ENUM('pendente', 'enviado', 'entregue', 'cancelado') DEFAULT 'pendente',

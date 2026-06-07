@@ -66,9 +66,6 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="page-header mb-0">Carrinho</h2>
-        <a href="<?=AppConfigConst::PATH_PRODUCTS_LIST ?>" class="btn btn-outline-dark">
-            <i class="bi bi-arrow-bar-left me-1"></i>Continuar Comprando
-        </a>
     </div>
 
     <?php if (empty($cartItems)): ?>
@@ -77,7 +74,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <div class="alert alert-info">
                     <i class="bi bi-cart3 me-2"></i>
                     <p>Seu carrinho está vazio.</p>
-                    <a href="<?=AppConfigConst::PATH_PRODUCTS_LIST ?>" class="btn btn-dark">Ir as compras</a>
+                    <a href="<?= AppConfigConst::PATH_PRODUCTS_LIST ?>" class="btn btn-dark">Ir as compras</a>
                 </div>
             </div>
         </div>
@@ -104,7 +101,8 @@ require_once __DIR__ . '/../includes/header.php';
                                     <td>€<?= htmlspecialchars(number_format($item['quantity'] * (float) $item['preco'], 2, ',', '.')) ?>
                                     </td>
                                     <td>
-                                        <form action="cart.php" method="POST" class="d-flex gap-2 align-items-center mb-0">
+                                        <form action="<?php AppConfigConst::PATH_CART ?>" method="POST"
+                                            class="d-flex gap-2 align-items-center mb-0">
                                             <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
                                             <input type="number" name="quantity" min="1" max="<?= (int) $item['stock'] ?>"
                                                 value="1" class="form-control form-control-sm" style="width: 5rem;"
@@ -130,6 +128,9 @@ require_once __DIR__ . '/../includes/header.php';
                         <p class="mb-1"><strong>Total de itens:</strong> <?= $totalQuantity ?></p>
                         <p class="mb-0"><strong>Valor total:</strong>
                             €<?= htmlspecialchars(number_format($totalPrice, 2, ',', '.')) ?></p>
+                    </div>
+                    <div>
+                        <a href="<?= AppConfigConst::PATH_ORDER_CHECKOUT ?>" class="btn btn-dark">Finalizar Compra</a>
                     </div>
                 </div>
             </div>
