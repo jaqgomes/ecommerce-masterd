@@ -67,7 +67,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                         </a>
                         <button type="button" class="btn btn-outline-danger btn-sm flex-fill" data-bs-toggle="modal"
                             data-bs-target="#deleteModal" data-id="<?= $product['id'] ?>"
-                            data-name="<?= htmlspecialchars($product['nome']) ?>" data-action="<?= AppConfigConst::PATH_PRODUCTS_DELETE ?>">
+                            data-name="<?= htmlspecialchars($product['nome']) ?>" data-action="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_DELETE) ?>">
                             <i class="bi bi-trash me-1"></i>Deletar
                         </button>
                     </td>

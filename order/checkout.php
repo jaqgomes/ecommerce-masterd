@@ -24,7 +24,7 @@ foreach ($cartItems as $ci) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
     if (empty($cartItems)) {
         $_SESSION['flash'] = ['type' => 'warning', 'message' => 'Seu carrinho está vazio.'];
-        header('Location: ' . AppConfigConst::PATH_CART);
+        header('Location: ' . AppConfigConst::path(AppConfigConst::PATH_CART));
         exit;
     }
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         $selectedAddress = trim($_POST['new_address'] ?? '');
         if ($selectedAddress === '') {
             $_SESSION['flash'] = ['type' => 'warning', 'message' => 'Digite a nova morada.'];
-            header('Location: ' . AppConfigConst::PATH_ORDER_CHECKOUT);
+            header('Location: ' . AppConfigConst::path(AppConfigConst::PATH_ORDER_CHECKOUT));
             exit;
         }
     } else {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
     if ($orderId) {
         $_SESSION['flash'] = ['type' => 'success', 'message' => "Encomenda #$orderId criada com sucesso. Morada selecionada: $selectedAddress"];
         unset($_SESSION['cart']);
-        header('Location: ' . AppConfigConst::PATH_ORDER_LIST);
+        header('Location: ' . AppConfigConst::path(AppConfigConst::PATH_ORDER_LIST));
         exit;
     } else {
         $_SESSION['flash'] = ['type' => 'danger', 'message' => 'Erro ao criar encomenda. Por favor, tente novamente.'];
@@ -80,7 +80,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
             <div class="empty-state">
                 <div class="alert alert-info">
                     <p>Seu carrinho está vazio.</p>
-                    <a href="<?= AppConfigConst::PATH_PRODUCTS_LIST ?>" class="btn btn-dark">Ir as compras</a>
+                    <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_LIST) ?>" class="btn btn-dark">Ir as compras</a>
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                     </div>
 
                     <div class="d-flex gap-2 justify-content-end">
-                        <a href="<?= AppConfigConst::PATH_CART ?>" class="btn btn-outline-secondary">Voltar ao Carrinho</a>
+                        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_CART) ?>" class="btn btn-outline-secondary">Voltar ao Carrinho</a>
                         <button type="submit" name="confirm_order" class="btn btn-dark">Finalizar Compra</button>
                     </div>
                 </form>

@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input['data_nascimento'] = trim($_POST['data_nascimento'] ?? '');
     $input['morada'] = trim($_POST['morada'] ?? '');
     $input['email'] = trim($_POST['email'] ?? '');
+    $input['telefone'] = trim($_POST['telefone'] ?? '');
     $input['username'] = trim($_POST['username'] ?? '');
     $input['senha_hash'] = trim($_POST['senha_hash'] ?? '');
 
@@ -42,6 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($input['email'] === '') {
         $errors['email'] = 'Email é obrigatório';
+    }
+
+    if ($input['telefone'] !== '' && !preg_match('/^(2|9)\d{8}$/', $input['telefone'])) {
+        $errors['telefone'] = 'Telefone inválido.';
     }
 
     if ($input['username'] === '') {
@@ -110,104 +115,8 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                 </div>
                 <div class="card-body p-4">
                     <form method="POST" action="#" novalidate>
-                        <div class="row g-3">
-                            <!--Nome-->
-                            <div class="col-12">
-                                <label for="nome" class="form-titulo">Nome<span class="text-danger">*</span></label>
-                                <input type="text" id="nome" name="nome"
-                                    class="form-control <?= isset($errors['nome']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['nome']) ?>" maxlength="100">
-                                <?php if (isset($errors['nome'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['nome'] ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
 
-                            <!--Apelido-->
-                            <div class="col-12">
-                                <label for="apelido" class="form-titulo">Apelido<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" id="apelido" name="apelido"
-                                    class="form-control <?= isset($errors['apelido']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['apelido']) ?>" maxlength="100">
-                                <?php if (isset($errors['apelido'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['apelido'] ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-
-
-                            <!--Data nascimento-->
-                            <div class="col-12">
-                                <label for="data_nascimento" class="form-titulo">Data Nascimento<span
-                                        class="text-danger">*</span></label>
-                                <input type="text" id="data_nascimento" name="data_nascimento"
-                                    class="form-control <?= isset($errors['data_nascimento']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['data_nascimento']) ?>" maxlength="100">
-                                <?php if (isset($errors['data_nascimento'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['data_nascimento'] ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <!--Morada-->
-                            <div class="col-12">
-                                <label for="morada" class="form-titulo">Morada<span class="text-danger">*</span></label>
-                                <input type="text" id="morada" name="morada"
-                                    class="form-control <?= isset($errors['morada']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['morada']) ?>" maxlength="100">
-                                <?php if (isset($errors['morada'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['morada'] ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-
-                            <!--Email-->
-                            <div class="col-12">
-                                <label for="email" class="form-titulo">Email<span class="text-danger">*</span></label>
-                                <input type="email" id="email" name="email"
-                                    class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['email']) ?>" maxlength="100">
-                                <?php if (isset($errors['email'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['email'] ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-
-                            <!--Telefone-->
-                            <div class="col-12">
-                                <label for="telefone" class="form-titulo">Telefone</label>
-                                <input type="tel" id="telefone" name="telefone"
-                                    class="form-control <?= isset($errors['telefone']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['telefone']) ?>" maxlength="100">
-                            </div>
-
-                            <!--Username-->
-                            <div class="col-12">
-                                <label for="username" class="form-titulo">Nome do usuário<span
-                                        class="text-danger">*</span></label>
-                                <input type="tel" id="username" name="username"
-                                    class="form-control <?= isset($errors['username']) ? 'is-invalid' : '' ?>"
-                                    value="<?= htmlspecialchars($input['username']) ?>" maxlength="100">
-                                <?php if (isset($errors['username'])): ?>
-                                    <div class="invalid-feedback">
-                                        <?= $errors['username'] ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-
-                            <!--Senha hash-->
-                            <div class="col-12">
-                                <label for="senha_hash" class="conteudo-label">Senha</label>
-                                <input type="password" id="senha_hash" name="senha_hash"
-                                    class="form-control <?= isset($errors['senha_hash']) ? 'is-invalid' : '' ?>"
-                                    maxlength="100">
-                            </div>
-                        </div>
+                        <?php include __DIR__ . '/../' . AppConfigConst::PATH_PROFILE_DETAILS; ?>    
 
                         <hr class="my-4">
 

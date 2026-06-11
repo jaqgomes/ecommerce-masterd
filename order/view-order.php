@@ -80,5 +80,3 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 </table>
 
 <?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>
-
-<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

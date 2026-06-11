@@ -25,7 +25,7 @@ require_once __DIR__ . '/includes/header.php';
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="page-header mb-0">Produtos</h2>
     <?php if (SessionService::isAdmin()): ?>
-        <a href="<?= AppConfigConst::PATH_PRODUCTS_MANAGER ?>" class="btn btn-dark">
+        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_MANAGER) ?>" class="btn btn-dark">
             <i class="bi bi-plus-lg me-1"></i>Gerenciar</a>
     <?php endif; ?>
 </div>

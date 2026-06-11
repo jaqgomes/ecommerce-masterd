@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if (SessionService::isAdmin()) {
     require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 } else {
-    require_once __DIR__ . '/../includes/header-blank.php';
+    require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER_BLANK;
 }
 ?>
 
@@ -123,8 +123,7 @@ if (SessionService::isAdmin()) {
                 <div class="card-body p-4">
                     <form method="POST" action="#" novalidate>
 
-                        
-                        <?php include AppConfigConst::PATH_PROFILE_DETAILS; ?>
+                        <?php include __DIR__ . '/../' . AppConfigConst::PATH_PROFILE_DETAILS; ?>
 
                         <hr class="my-4">
 

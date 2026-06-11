@@ -9,7 +9,7 @@ SessionService::isRequireAdmin();
 
 $productService = new ProductService();
 
-$listProductPageLink = "/ecommerce-masterd/product/list-product-manager.php";
+$listProductPageLink = AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_MANAGER);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: $listProductPageLink");

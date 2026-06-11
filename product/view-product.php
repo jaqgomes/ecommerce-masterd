@@ -25,7 +25,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 
     <!-- Back Button -->
     <div class="mb-4">
-        <a href="list-product.php" class="btn btn-outline-dark">
+        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_LIST) ?>" class="btn btn-outline-dark">
             <i class="bi bi-arrow-bar-left"></i>
             Voltar
         </a>
@@ -38,7 +38,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                 <!--Image -->
                 <?php if (!empty($product['imagem'])): ?>
                     <div class="view-image-container">
-                        <img src="<?= AppConfigConst::PATH_PRODUCTS_UPLOADS . htmlspecialchars($product['imagem']) ?>"
+                        <img src="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_UPLOADS) . htmlspecialchars($product['imagem']) ?>"
                             alt="<?= htmlspecialchars($product['nome']) ?>" class="view-image">
                     </div>
                 <?php else: ?>
@@ -100,7 +100,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                 <!-- Quantity & Add to Basket - Push to bottom -->
                 <div class="mt-auto">
                     <?php if ((int) $product['stock'] > 0): ?>
-                        <form id="addToBasketForm" action="<?= AppConfigConst::PATH_ADD_TO_CART ?>" method="POST"
+                        <form id="addToBasketForm" action="<?= AppConfigConst::path(AppConfigConst::PATH_ADD_TO_CART) ?>" method="POST"
                             class="mt-4 pt-3 border-top">
                             <div class="row g-2">
                                 <div class="col-auto">

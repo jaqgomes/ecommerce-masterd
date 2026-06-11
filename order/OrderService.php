@@ -41,7 +41,7 @@ class OrderService
             $stmt->execute();
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         }
-        header("Location: " . AppConfigConst::PATH_INDEX);
+        header("Location: " . AppConfigConst::path(AppConfigConst::PATH_INDEX));
         exit;
     }
 

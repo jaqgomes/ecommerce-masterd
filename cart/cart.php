@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
         }
     }
 
-    header("Location: . AppConfigConst::PATH_CART");
+    header('Location: ' . AppConfigConst::path(AppConfigConst::PATH_CART));
     exit;
 }
 
@@ -101,7 +101,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                                     <td>€<?= htmlspecialchars(number_format($item['quantity'] * (float) $item['preco'], 2, ',', '.')) ?>
                                     </td>
                                     <td>
-                                        <form action="<?php AppConfigConst::PATH_CART ?>" method="POST"
+                                        <form action="" method="POST"
                                             class="d-flex gap-2 align-items-center mb-0">
                                             <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
                                             <input type="number" name="quantity" min="1" max="<?= (int) $item['stock'] ?>"
@@ -130,7 +130,7 @@ require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
                             €<?= htmlspecialchars(number_format($totalPrice, 2, ',', '.')) ?></p>
                     </div>
                     <div>
-                        <a href="<?= AppConfigConst::PATH_ORDER_CHECKOUT ?>" class="btn btn-dark">Finalizar Compra</a>
+                        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_ORDER_CHECKOUT) ?>" class="btn btn-dark">Finalizar Compra</a>
                     </div>
                 </div>
             </div>
