@@ -30,7 +30,7 @@
                             <a class="nav-link" href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_MANAGER) ?>">
                                 <i class="bi-shop-window me-1"></i>Produtos
                             </a>
-                        <?php elseif (SessionService::isLoggedIn()): ?>
+                        <?php else: ?>
                             <a class="nav-link" href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_LIST) ?>">
                                 <i class="bi-shop-window me-1"></i>Produtos
                             </a>
