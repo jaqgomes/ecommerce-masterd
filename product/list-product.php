@@ -11,7 +11,7 @@ $productList = $productService->getAllProduct();
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <?php if ($flash): ?>
@@ -39,7 +39,7 @@ require_once __DIR__ . '/../includes/header.php';
             <div class="col">
                 <div class="card h-100 position-relative">
                     <?php if (!empty($product['imagem'])): ?>
-                        <img src="<?= AppConfigConst::PATH_PRODUCTS_UPLOADS . htmlspecialchars($product['imagem']) ?>"
+                        <img src="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_UPLOADS) . htmlspecialchars($product['imagem']) ?>"
                             class="card-img-top img-preview card-image" alt="<?= htmlspecialchars($product['nome']) ?>">
                     <?php else: ?>
                         <div class="card-img-top card-image-placeholder">
@@ -76,7 +76,7 @@ require_once __DIR__ . '/../includes/header.php';
 
                         <div class="d-flex gap-2 justify-content-between">
                             <?php if ((int) $product['stock'] > 0): ?>
-                                <form action="<?= AppConfigConst::PATH_ADD_TO_CART ?>" method="POST" class="mb-0">
+                                <form action="<?= AppConfigConst::path(AppConfigConst::PATH_ADD_TO_CART) ?>" method="POST" class="mb-0">
                                     <button type="submit" class="btn btn-success btn-sm" name="product_id"
                                         value="<?= (int) $product['id'] ?>">
                                         <i class="bi bi-cart-plus me-1"></i>
@@ -90,11 +90,11 @@ require_once __DIR__ . '/../includes/header.php';
                                 </button>
                             <?php endif; ?>
                         </div>
-                        <a href="<?= AppConfigConst::PATH_PRODUCTS_VIEW . "?id=" . $product['id'] ?>" class="stretched-link"></a>
+                        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_VIEW) . "?id=" . $product['id'] ?>" class="stretched-link"></a>
                     </div>
                 </div>
             </div>
         <?php } ?>
     </div>
 <?php endif; ?>
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

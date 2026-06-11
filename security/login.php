@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/../includes/header-blank.html';
 include 'SecurityService.php';
 
 $securityService = new SecurityService();
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result === true) {
             $_SESSION['flash'] = ['type' => 'success', 'message' => 'Autenticado com Sucesso!'];
-            header("Location: " . AppConfigConst::PATH_INDEX);
+            header("Location: " . AppConfigConst::path(AppConfigConst::PATH_INDEX));
             exit;
         }
 
@@ -45,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER_BLANK;
 ?>
 
 <div class="d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 10rem);">
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <hr class="my-4">
 
                         <div class="d-flex gap-2 justify-content-end">
-                            <a href="<?= AppConfigConst::PATH_INDEX ?>" class="btn btn-outline-secondary">
+                            <a href="<?= AppConfigConst::path(AppConfigConst::PATH_INDEX) ?>" class="btn btn-outline-secondary">
                                 <i class="bi bi-x-lg me-1"></i>
                                 Cancelar
                             </a>
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <p class="footer-link">
-                            Ainda não tem conta? <a href="<?= AppConfigConst::PATH_REGISTER ?>">Criar conta</a>
+                            Ainda não tem conta? <a href="<?= AppConfigConst::path(AppConfigConst::PATH_REGISTER) ?>">Criar conta</a>
                         </p>
 
                     </form>
@@ -135,4 +135,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
-    <?php require_once __DIR__ . '/../includes/footer-blank.html'; ?>
+    <?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER_BLANK; ?>

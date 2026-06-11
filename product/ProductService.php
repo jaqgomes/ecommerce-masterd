@@ -16,10 +16,10 @@ class ProductService
     //executa uma query no banco de dados ($stmt);
     //utilizado quando na criacao de projetos, depois de validar os dados, depois de fazer upload da imagem
 
-    public function createProduct($nome, $descricao, $categoria, $preco, $stock, $imagem, $data_criacao)
+    public function createProduct($nome, $descricao, $categoria, $preco, $stock, $imagem)
     {
-        $stmt = $this->database->prepare("INSERT INTO produtos (nome, descricao, categoria, preco, stock, imagem, data_criacao) VALUES(?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssiss", $nome, $descricao, $categoria, $preco, $stock, $imagem, $data_criacao);
+        $stmt = $this->database->prepare("INSERT INTO produtos (nome, descricao, categoria, preco, stock, imagem) VALUES(?,?,?,?,?,?)");
+        $stmt->bind_param("ssssis", $nome, $descricao, $categoria, $preco, $stock, $imagem);
         return $stmt->execute();
 
     }

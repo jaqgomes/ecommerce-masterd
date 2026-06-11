@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
     }
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <div class="container my-5">
@@ -138,4 +138,4 @@ require_once __DIR__ . '/../includes/header.php';
 
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

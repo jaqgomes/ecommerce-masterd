@@ -20,7 +20,7 @@ if (SessionService::isAdmin()) {
     $orderList = $orderService->getAllOrderByUserId($id_utilizador);
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="page-header mb-0">Encomendas</h2>
@@ -51,7 +51,6 @@ require_once __DIR__ . '/../includes/header.php';
                 <th scope="col">Data da Encomenda</th>
                 <th scope="col">Total</th>
                 <th scope="col">Estado</th>
-                <th scope="col" hidden="<?= SessionService::isAdmin() ?>">Ações</th>
             </tr>
         </thead>
 
@@ -60,7 +59,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <tr class="position-relative">
                     <td>
                         <?= $order['id'] ?>
-                        <a href="view-order.php?id=<?= $order['id'] ?>" class="stretched-link"></a>
+                        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_ORDER_VIEW) ?> ?id= <?= $order['id'] ?>" class="stretched-link"></a>
                     </td>
                     <td>
                         <?= $order['utilizador'] ?>
@@ -74,27 +73,11 @@ require_once __DIR__ . '/../includes/header.php';
                     <td>
                         <?= $order['estado'] ?>
                     </td>
-                    <td hidden="<?= SessionService::isAdmin() ?>">
-                        <a href="<?= AppConfigConst::PATH_PRODUCTS_EDIT . "?id=" . $order['id'] ?>"
-                            class="btn btn-outline-dark btn-sm flex-fill">
-                            <i class="bi bi-pencil me-1"></i>Editar
-                        </a>
-                        <button type="button" class="btn btn-outline-danger btn-sm flex-fill" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" data-id="<?= $order['id'] ?>"
-                            data-name="<?= htmlspecialchars($order['id']) ?>"
-                            data-action="<?= AppConfigConst::PATH_PRODUCTS_DELETE ?>">
-                            <i class="bi bi-trash me-1"></i>Deletar
-                        </button>
-                    </td>
                 </tr>
             <?php } ?>
         </tbody>
     </table>
 
-    <?php include __DIR__ . '/../includes/modal.html'; ?>
-
 <?php endif; ?>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
-
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

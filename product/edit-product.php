@@ -93,12 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         $_SESSION['flash'] = ['type' => 'success', 'message' => 'Produto alterado com sucesso!'];
-        header('Location: /ecommerce-masterd/product/list-product-manager.php');
+        header("Location: " . AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_MANAGER));
         exit;
     }
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <div class="row justify-content-center">
@@ -118,7 +118,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <i class="bi bi-plus-circle me-2"></i>Dados Produto
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="<?= AppConfigConst::PATH_PRODUCTS_EDIT . "?id=" . $id ?>" novalidate
+                <form method="POST" action="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_EDIT) . "?id=" . $id ?>" novalidate
                     enctype="multipart/form-data">
 
                     <?php include __DIR__ . '/product-details.html'; ?>
@@ -126,7 +126,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <hr class="my-4">
 
                     <div class="d-flex gap-2 justify-content-end">
-                        <a href="<?= AppConfigConst::PATH_PRODUCTS_MANAGER ?>" class="btn btn-outline-secondary">
+                        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_MANAGER) ?>" class="btn btn-outline-secondary">
                             <i class="bi bi-x-lg me-1"></i>
                             Cancelar
                         </a>
@@ -142,4 +142,4 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

@@ -78,8 +78,8 @@
     <div>
         <?php if (!empty($input['imagem'])): ?>
         <p>Imagem atual:</p>
-        <img src="/ecommerce-masterd/product/uploads/<?= $input['imagem'] ?>" alt="Imagem atual"
-            style="max-width: 150px; margin-bottom:10px;">
+        <img src="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_UPLOADS) . $input['imagem'] ?>"
+            alt="Imagem atual" style="max-width: 150px; margin-bottom:10px;">
 
         <div style="display:block; margin-top:10px;">
             <input id="remover_imagem" type="checkbox" name="remover_imagem" value="1">
@@ -89,10 +89,12 @@
     </div>
 
     <!--Data_criacao-->
-    <div class="col-md-6">
+    <?php if (!empty($input['data_criacao'])): ?>
+    <div class="col-md-4" >
         <label for="data_criacao" class="data-label">Data da criação</label>
         <input type="date" id="data_criacao" name="data_criacao" class="form-control"
-            value="<?= htmlspecialchars($input['data_criacao']) ?>">
+            value="<?= htmlspecialchars($input['data_criacao']) ?>" readonly>
     </div>
+    <?php endif; ?>
 
 </div>

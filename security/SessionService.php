@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../config/Constants.php';
 
 class SessionService
@@ -7,7 +8,7 @@ class SessionService
     {
         $_SESSION = [];
         session_destroy();
-        header("Location: " . AppConfigConst::PATH_INDEX);
+        header("Location: " . AppConfigConst::path(AppConfigConst::PATH_INDEX));
         exit;
     }
 
@@ -24,7 +25,7 @@ class SessionService
     public static function isRequireLogin()
     {
         if (!self::isLoggedIn()) {
-            header("Location: " . AppConfigConst::PATH_LOGIN);
+            header("Location: " . AppConfigConst::path(AppConfigConst::PATH_LOGIN));
             exit;
         }
     }
@@ -32,7 +33,7 @@ class SessionService
     public static function isRequireAdmin()
     {
         if (!self::isAdmin()) {
-            header("Location: " . AppConfigConst::PATH_INDEX);
+            header("Location: " . AppConfigConst::path(AppConfigConst::PATH_INDEX));
             exit;
         }
     }

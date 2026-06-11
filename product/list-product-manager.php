@@ -14,12 +14,12 @@ $pageTitle = 'Ecommerce - MasterD';
 $productService = new ProductService();
 $productList = $productService->getAllProduct();
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="page-header mb-0">Gerenciador de Produtos</h2>
-    <a href="<?= AppConfigConst::PATH_PRODUCTS_CREATE ?>" class="btn btn-dark"><i class="bi bi-plus-lg me-1"></i>Adicionar</a>
+    <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_CREATE) ?>" class="btn btn-dark"><i class="bi bi-plus-lg me-1"></i>Adicionar</a>
 </div>
 
 <?php if ($flash): ?>
@@ -36,7 +36,7 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="empty-state">
             <h4>Nenhuma produto encontrado. </h4>
             <p>Comece adicionando seu primeiro produto.</p>
-            <a href="<?= AppConfigConst::PATH_PRODUCTS_CREATE ?>" class="btn btn-dark">Adicionar</a>
+            <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_CREATE) ?>" class="btn btn-dark">Adicionar</a>
         </div>
     </div>
 
@@ -62,7 +62,7 @@ require_once __DIR__ . '/../includes/header.php';
                     <td><?= $product['categoria'] ?></td>
                     <td><?= $product['stock'] ?></td>
                     <td>
-                        <a href="<?= AppConfigConst::PATH_PRODUCTS_EDIT . "?id=" . $product['id'] ?>" class="btn btn-outline-dark btn-sm flex-fill">
+                        <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_EDIT) . "?id=" . $product['id'] ?>" class="btn btn-outline-dark btn-sm flex-fill">
                             <i class="bi bi-pencil me-1"></i>Editar
                         </a>
                         <button type="button" class="btn btn-outline-danger btn-sm flex-fill" data-bs-toggle="modal"
@@ -80,4 +80,4 @@ require_once __DIR__ . '/../includes/header.php';
 
 <?php endif; ?>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

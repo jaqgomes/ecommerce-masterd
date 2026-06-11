@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'], $_POST['pro
         }
     }
 
-    header('Location: cart.php');
+    header("Location: . AppConfigConst::PATH_CART");
     exit;
 }
 
@@ -52,7 +52,7 @@ foreach ($cartItems as $item) {
 
 $pageTitle = 'Carrinho';
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <div class="container my-5">
@@ -74,7 +74,7 @@ require_once __DIR__ . '/../includes/header.php';
                 <div class="alert alert-info">
                     <i class="bi bi-cart3 me-2"></i>
                     <p>Seu carrinho está vazio.</p>
-                    <a href="<?= AppConfigConst::PATH_PRODUCTS_LIST ?>" class="btn btn-dark">Ir as compras</a>
+                    <a href="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_LIST) ?>" class="btn btn-dark">Ir as compras</a>
                 </div>
             </div>
         </div>
@@ -138,4 +138,4 @@ require_once __DIR__ . '/../includes/header.php';
     <?php endif; ?>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

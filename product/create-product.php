@@ -7,11 +7,11 @@ SessionService::isRequireAdmin();
 include('ProductService.php');
 
 $productService = new ProductService();
-$listProductPageLink = "/ecommerce-masterd/product/list-product-manager.php";
+$listProductPageLink = AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_MANAGER);
 
 $pageTitle = 'Add Product — Ecommerce';
 $errors = [];
-$input = ['nome' => '', 'descricao' => '', 'categoria' => '', 'preco' => '', 'stock' => '', 'imagem' => '', 'data_criacao' => ''];
+$input = ['nome' => '', 'descricao' => '', 'categoria' => '', 'preco' => '', 'stock' => '', 'imagem' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input['preco'] = trim($_POST['preco'] ?? '');
     $input['stock'] = trim($_POST['stock'] ?? '');
     $input['imagem'] = trim($_POST['imagem'] ?? '');
-    $input['data_criacao'] = trim($_POST['data_criacao'] ?? '');
 
     if ($input['nome'] === '') {
         $errors['nome'] = 'Nome é obrigatório.';
@@ -61,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $input['categoria'],
             $input['preco'],
             $input['stock'],
-            $input['imagem'],
-            $input['data_criacao']
+            $input['imagem']
         );
 
         $_SESSION['flash'] = ['type' => 'success', 'message' => 'Produto adicionado com sucesso!'];
@@ -71,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <div class="row justify-content-center">
@@ -91,10 +89,10 @@ require_once __DIR__ . '/../includes/header.php';
                 <i class="bi bi-plus-circle me-2"></i>Dados da Produto
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="/ecommerce-masterd/product/create-product.php" novalidate
+                <form method="POST" action="<?= AppConfigConst::path(AppConfigConst::PATH_PRODUCTS_CREATE)?>" novalidate
                     enctype="multipart/form-data">
 
-                    <?php include __DIR__ . AppConfigConst::PATH_PRODUCTS_DETAILS; ?>
+                    <?php include __DIR__ . '/../' . AppConfigConst::PATH_PRODUCTS_DETAILS; ?>
 
                     <hr class="my-4">
 
@@ -115,4 +113,4 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

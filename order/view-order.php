@@ -17,12 +17,8 @@ $id_utilizador = $_SESSION['user_id'];
 
 // Fetch order and authorize
 $order = $orderService->getOrderById($id_encomenda);
-if (!$order) {
-    header('Location: ' . AppConfigConst::PATH_ORDER_LIST);
-    exit;
-}
-if (!SessionService::isAdmin() && (int)$order['id_utilizador'] !== (int)$id_utilizador) {
-    header('Location: ' . AppConfigConst::PATH_ORDER_LIST);
+if (!$order || (!SessionService::isAdmin() && (int) $order['id_utilizador'] !== (int) $id_utilizador)) {
+    header('Location: ' . AppConfigConst::path(AppConfigConst::PATH_ORDER_LIST));
     exit;
 }
 
@@ -33,7 +29,7 @@ if (SessionService::isAdmin()) {
     $orderDetailList = $orderService->getOrderDetailByUserIdAndOrderId($id_utilizador, $id_encomenda);
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="page-header mb-0">Detalhes Encomenda</h2>
@@ -43,7 +39,8 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="card-body">
         <p class="mb-1"><strong>Encomenda #:</strong> <?= htmlspecialchars($order['id']) ?></p>
         <p class="mb-1"><strong>Data:</strong> <?= htmlspecialchars($order['data_encomenda']) ?></p>
-        <p class="mb-1"><strong>Total:</strong> €<?= htmlspecialchars(number_format($order['total'], 2, ',', '.')) ?></p>
+        <p class="mb-1"><strong>Total:</strong> €<?= htmlspecialchars(number_format($order['total'], 2, ',', '.')) ?>
+        </p>
         <p class="mb-1"><strong>Estado:</strong> <?= htmlspecialchars($order['estado']) ?></p>
         <p class="mb-0"><strong>Morada de entrega:</strong> <?= htmlspecialchars($order['morada'] ?? '') ?></p>
     </div>
@@ -63,7 +60,6 @@ require_once __DIR__ . '/../includes/header.php';
             <th scope="col">Item</th>
             <th scope="col">Preço</th>
             <th scope="col">Quantidade</th>
-            <th scope="col" hidden="<?= SessionService::isAdmin() ?>">Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -83,6 +79,6 @@ require_once __DIR__ . '/../includes/header.php';
     </tbody>
 </table>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>

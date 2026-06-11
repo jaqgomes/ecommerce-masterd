@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result === true) {
             $_SESSION['flash'] = ['type' => 'success', 'message' => 'Usuário atualizado com sucesso!'];
-            header("Location: " . AppConfigConst::PATH_PROFILE);
+            header("Location: " . AppConfigConst::path(AppConfigConst::PATH_PROFILE));
             exit;
         } else {
             $errors['generic'] = $result;
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../' . AppConfigConst::PATH_HEADER;
 ?>
 
 <div class="d-flex align-items-center justify-content-center" style="min-height: calc(100vh - 10rem);">
@@ -213,7 +213,8 @@ require_once __DIR__ . '/../includes/header.php';
 
                         <div class="d-flex gap-2 justify-content-end">
 
-                            <a href="<?= AppConfigConst::PATH_INDEX ?>" class="btn btn-outline-secondary">
+                            <a href="<?= AppConfigConst::path(AppConfigConst::PATH_INDEX) ?>"
+                                class="btn btn-outline-secondary">
                                 <i class="bi bi-x-lg me-1"></i>
                                 Cancelar
                             </a>
@@ -230,4 +231,4 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 </div>
 
-<?php require_once __DIR__ . '/../includes/footer.html'; ?>
+<?php require_once __DIR__ . '/../' . AppConfigConst::PATH_FOOTER; ?>
