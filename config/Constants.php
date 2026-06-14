@@ -19,6 +19,7 @@ class AppConfigConst
 
     public const string PATH_PRODUCTS_DETAILS = 'product/product-details.html';
     public const string PATH_PRODUCTS_LIST = 'product/list-product.php';
+    public const string PATH_PRODUCTS_LIST_SECTION = 'product/product-list-section.html';
     public const string PATH_PRODUCTS_UPLOADS = 'product/uploads/';
     public const string PATH_PRODUCTS_MANAGER = 'product/list-product-manager.php';
     public const string PATH_PRODUCTS_VIEW = 'product/view-product.php';
